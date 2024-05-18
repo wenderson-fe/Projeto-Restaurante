@@ -13,11 +13,11 @@ public class RestauranteApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(RestauranteApplication.class, args);
 
-		Scanner sc = new Scanner(System.in);
+		//Scanner sc = new Scanner(System.in);
 
-		ViewRestaurante view = new ViewRestauranteImpl();
+		//ViewRestaurante view = new ViewRestauranteImpl();
 
-		view.exibirMenu();
+		//view.exibirMenu();
 
 	}
 }
