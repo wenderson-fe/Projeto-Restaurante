@@ -1,5 +1,8 @@
 package com.example.restaurante;
 
+import com.example.restaurante.controller.ControllerRestauranteImpl;
+import com.example.restaurante.model.repository.RepositorioRestaurante;
+import com.example.restaurante.model.repository.RepositorioRestauranteImpl;
 import com.example.restaurante.view.ViewRestaurante;
 import com.example.restaurante.view.ViewRestauranteImpl;
 import org.springframework.boot.SpringApplication;
@@ -16,7 +19,11 @@ public class RestauranteApplication {
 		Scanner sc = new Scanner(System.in);
 		boolean continuar = true;
 
-		ViewRestaurante view = new ViewRestauranteImpl();
+		// Configuração das dependências
+		RepositorioRestaurante repositorioRestaurante = new RepositorioRestauranteImpl();
+		ControllerRestauranteImpl controllerRestaurante = new ControllerRestauranteImpl(repositorioRestaurante);
+		ViewRestaurante view = new ViewRestauranteImpl(controllerRestaurante);
+
 		do {
 			view.exibirMenu();
 			System.out.println("Escolha: ");
@@ -28,11 +35,11 @@ public class RestauranteApplication {
 
 				view.executarOpcao(escolha);
 
-				continuar = !view.saindoDoSistema(); //operador "!" para inverter o valor retornado pelo método saindoDoSistema
 			} else {
 				System.out.println("Entrada inválida! Por favor, digite um número.");
 				sc.nextLine(); // Limpa o buffer
 			}
+
 		} while (continuar);
 
 		sc.close();

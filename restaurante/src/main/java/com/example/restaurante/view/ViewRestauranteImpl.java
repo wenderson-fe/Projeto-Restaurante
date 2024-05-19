@@ -1,8 +1,19 @@
 package com.example.restaurante.view;
 
+import com.example.restaurante.controller.ControllerRestaurante;
+import com.example.restaurante.controller.ControllerRestauranteImpl;
+import com.example.restaurante.model.entity.Funcionario;
+import com.example.restaurante.model.repository.RepositorioRestaurante;
+
 import java.util.Scanner;
 
 public class ViewRestauranteImpl implements ViewRestaurante {
+    private ControllerRestaurante controllerRestaurante;
+
+    public ViewRestauranteImpl(ControllerRestaurante controllerRestaurante) {
+        this.controllerRestaurante = controllerRestaurante;
+    }
+
     Scanner sc = new Scanner(System.in);
 
     @Override
@@ -67,25 +78,36 @@ public class ViewRestauranteImpl implements ViewRestaurante {
 
     // Método para cadastrar um funcionário
     public void cadastroFuncionario() {
-        System.out.println("nome");
+        //Receber informações do funcionário
+        System.out.println("Digite o nome: ");
+        String nome = sc.nextLine();
+        System.out.println("Digite o cargo: ");
+        String cargo = sc.nextLine();
+        System.out.println("Digite o telefone: ");
+        String telefone = sc.nextLine();
+        System.out.println("Digite o E-mail: ");
+        String email = sc.nextLine();
+        System.out.println("Digite o salário: ");
+        int salario = sc.nextInt();
+        System.out.println("Digite o nome do superior(se não hover deixe vazio): ");
+        String superior = sc.nextLine();
+
     }
 
     // Método para sair do sistema
-    public boolean saindoDoSistema() {
-        //Sai do sistema
+    public void saindoDoSistema() {
         System.out.println("Você realmente deseja sair do sistema? (S/N)");
         String resposta = sc.nextLine();
-
         if (resposta.equalsIgnoreCase("S")) {
             System.out.println("Saindo do sistema...");
-            return true;
+            System.exit(0);
         } else if (resposta.equalsIgnoreCase("N")) {
             System.out.println("Operação de saída cancelada.");
-            return false;
+
         } else {
             System.out.println("Opção inválida. Operação de saída cancelada.");
-            return false;
         }
+
     }
 }
 
