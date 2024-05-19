@@ -3,12 +3,12 @@ package com.example.restaurante.model.entity;
 public class Funcionario {
     private String nome;
     private String cargo;
-    private int telefone;
+    private String telefone;
     private String email;
     private double salario;
     private String superior;
 
-    public Funcionario (String nome, String cargo, int telefone, String email, double salario, String superior) {
+    public Funcionario (String nome, String cargo, String telefone, String email, double salario, String superior) {
         this.nome = nome;
         this.cargo = cargo;
         this.telefone = telefone;
@@ -25,7 +25,7 @@ public class Funcionario {
         return cargo;
     }
 
-    public int getTelefone() {
+    public String getTelefone() {
         return telefone;
     }
 

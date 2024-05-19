@@ -40,7 +40,7 @@ public class RestauranteApplication {
 				sc.nextLine(); // Limpa o buffer
 			}
 
-		} while (continuar);
+		} while (continuar); // O sistema só é encerrado com a interação do usuário
 
 		sc.close();
 

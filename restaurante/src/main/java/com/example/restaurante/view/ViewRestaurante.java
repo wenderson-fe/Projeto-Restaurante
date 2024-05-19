@@ -7,5 +7,5 @@ public interface ViewRestaurante {
 
     //Gestão funcionario
     void gerenciaFuncionario();
-    void cadastroFuncionario();
+    void cadastro();
 }

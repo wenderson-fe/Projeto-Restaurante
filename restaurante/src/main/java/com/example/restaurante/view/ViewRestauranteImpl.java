@@ -1,9 +1,6 @@
 package com.example.restaurante.view;
 
 import com.example.restaurante.controller.ControllerRestaurante;
-import com.example.restaurante.controller.ControllerRestauranteImpl;
-import com.example.restaurante.model.entity.Funcionario;
-import com.example.restaurante.model.repository.RepositorioRestaurante;
 
 import java.util.Scanner;
 
@@ -68,7 +65,7 @@ public class ViewRestauranteImpl implements ViewRestaurante {
 
         switch (escolha) {
             case 1:
-                cadastroFuncionario();
+                cadastro();
                 break;
             default:
                 System.out.println("Opção inválida!");
@@ -77,7 +74,7 @@ public class ViewRestauranteImpl implements ViewRestaurante {
     }
 
     // Método para cadastrar um funcionário
-    public void cadastroFuncionario() {
+    public void cadastro() {
         //Receber informações do funcionário
         System.out.println("Digite o nome: ");
         String nome = sc.nextLine();
@@ -88,9 +85,12 @@ public class ViewRestauranteImpl implements ViewRestaurante {
         System.out.println("Digite o E-mail: ");
         String email = sc.nextLine();
         System.out.println("Digite o salário: ");
-        int salario = sc.nextInt();
-        System.out.println("Digite o nome do superior(se não hover deixe vazio): ");
+        double salario = sc.nextDouble();
+        sc.nextLine();
+        System.out.println("Digite o nome do superior (se não hover escreva gerente): ");
         String superior = sc.nextLine();
+
+        controllerRestaurante.cadastrar(nome, cargo, telefone, email, salario, superior);
 
     }
 
