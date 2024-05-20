@@ -35,6 +35,8 @@ public class ViewRestauranteImpl implements ViewRestaurante {
     public void executarOpcao(int n) {
         //Captura a opção escolhida pelo usuário.
         switch (n) {
+            case 1:
+                gerenciamentoCliente();
             case 2:
                 gerenciaFuncionario();
                 break;
@@ -47,6 +49,7 @@ public class ViewRestauranteImpl implements ViewRestaurante {
         }
     }
 
+    // -----------------------------------------------------------------------------------------------------------------
     //Gestão funcionario
     @Override
     public void gerenciaFuncionario() {
@@ -58,6 +61,8 @@ public class ViewRestauranteImpl implements ViewRestaurante {
         System.out.println("3. Excluir Funcionário");
         System.out.println("-------------------------------------");
         System.out.println("4. Listar Funcionário");
+        System.out.println("-------------------------------------");
+        System.out.println("5. Voltar ao menu principal");
         System.out.println("-------------------------------------");
         System.out.println("Escolha:");
         int escolha = sc.nextInt();
@@ -80,8 +85,14 @@ public class ViewRestauranteImpl implements ViewRestaurante {
                 listar();
                 break;
 
+            case 5:
+                menuPrincipal();
+                System.out.println("Voltando ao menu principal...");
+                break;
+
             default:
                 System.out.println("Opção inválida!");
+                gerenciaFuncionario();
                 break;
         }
     }
@@ -144,7 +155,57 @@ public class ViewRestauranteImpl implements ViewRestaurante {
         controllerRestaurante.deletar(funcionarioExcluir);
     }
 
+    //------------------------------------------------------------------------------------------------------------------
+    //Gestão Cliente
+    @Override
+    public void gerenciamentoCliente() {
+        System.out.println("--------------- Menu ----------------");
+        System.out.println("1. Cadastrar Cliente");
+        System.out.println("-------------------------------------");
+        System.out.println("2. Atualizar dados de Cliente");
+        System.out.println("-------------------------------------");
+        System.out.println("3. Excluir Cliente");
+        System.out.println("-------------------------------------");
+        System.out.println("4. Listar Cliente");
+        System.out.println("-------------------------------------");
+        System.out.println("5. Voltar ao menu principal");
+        System.out.println("-------------------------------------");
+        System.out.println("Escolha:");
+        int escolha = sc.nextInt();
+        sc.nextLine();
+
+        switch (escolha) {
+            case 1:
+                cadastro();
+                break;
+
+            case 2:
+                atualizar();
+                break;
+
+            case 3:
+                deletar();
+                break;
+
+            case 4:
+                listar();
+                break;
+
+            case 5:
+                menuPrincipal();
+                System.out.println("Voltando ao menu principal...");
+                break;
+
+            default:
+                System.out.println("Opção inválida!");
+                gerenciaFuncionario();
+                break;
+        }
+
+    }
+
     // Método para sair do sistema
+    @Override
     public void saindoDoSistema() {
         System.out.println("Você realmente deseja sair do sistema? (S/N)");
         String resposta = sc.nextLine();
@@ -158,6 +219,12 @@ public class ViewRestauranteImpl implements ViewRestaurante {
             System.out.println("Opção inválida. Operação de saída cancelada.");
         }
 
+    }
+
+    //Método para voltar ao menu principal
+    @Override
+    public void menuPrincipal() {
+        exibirMenu();
     }
 }
 
