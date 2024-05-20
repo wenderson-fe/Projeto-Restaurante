@@ -8,4 +8,7 @@ public interface ViewRestaurante {
     //Gestão funcionario
     void gerenciaFuncionario();
     void cadastro();
+    void listar();
+    void atualizar();
+    void deletar();
 }

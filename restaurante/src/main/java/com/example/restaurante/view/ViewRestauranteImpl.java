@@ -67,6 +67,19 @@ public class ViewRestauranteImpl implements ViewRestaurante {
             case 1:
                 cadastro();
                 break;
+
+            case 2:
+                atualizar();
+                break;
+
+            case 3:
+                deletar();
+                break;
+
+            case 4:
+                listar();
+                break;
+
             default:
                 System.out.println("Opção inválida!");
                 break;
@@ -92,6 +105,43 @@ public class ViewRestauranteImpl implements ViewRestaurante {
 
         controllerRestaurante.cadastrar(nome, cargo, telefone, email, salario, superior);
 
+    }
+
+    @Override
+    public void listar() {
+        controllerRestaurante.listar();
+    }
+
+    @Override
+    public void atualizar() {
+        controllerRestaurante.listar();
+        System.out.println("Digite o nome do funcionário para atualizar as informações: ");
+        String funcionarioAtualizar = sc.nextLine();
+
+        System.out.println("Digite o novo nome: ");
+        String nome = sc.nextLine();
+        System.out.println("Digite o novo cargo: ");
+        String cargo = sc.nextLine();
+        System.out.println("Digite o novo telefone: ");
+        String telefone = sc.nextLine();
+        System.out.println("Digite o novo E-mail: ");
+        String email = sc.nextLine();
+        System.out.println("Digite o novo salário: ");
+        double salario = sc.nextDouble();
+        sc.nextLine();
+        System.out.println("Digite o nome do superior (se não hover escreva gerente): ");
+        String superior = sc.nextLine();
+
+        controllerRestaurante.atualizar(funcionarioAtualizar, nome, cargo, telefone, email, salario, superior);
+    }
+
+    @Override
+    public void deletar() {
+        controllerRestaurante.listar();
+        System.out.println("Digite o nome do funcionário que deseja excluir: ");
+        String funcionarioExcluir = sc.nextLine();
+
+        controllerRestaurante.deletar(funcionarioExcluir);
     }
 
     // Método para sair do sistema
