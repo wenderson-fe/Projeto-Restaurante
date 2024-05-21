@@ -1,15 +1,16 @@
-package com.example.restaurante.controller;
+package com.example.restaurante.controller.ImplementsController;
 
+import com.example.restaurante.controller.InterfacesController.FuncionarioController;
 import com.example.restaurante.model.entity.Funcionario;
-import com.example.restaurante.model.repository.RepositorioRestaurante;
+import com.example.restaurante.model.repository.InterfacesRepository.FuncionarioRepository;
 
 import java.util.List;
 
-public class ControllerRestauranteImpl implements ControllerRestaurante {
-    private RepositorioRestaurante repositorioRestaurante;
+public class FuncionarioControllerImpl implements FuncionarioController {
+    private FuncionarioRepository funcionarioRepository;
 
-    public ControllerRestauranteImpl(RepositorioRestaurante repositorioRestaurante) {
-        this.repositorioRestaurante = repositorioRestaurante;
+    public FuncionarioControllerImpl(FuncionarioRepository repositoryFuncionario) {
+        this.funcionarioRepository = repositoryFuncionario;
     }
 
     @Override
@@ -18,14 +19,14 @@ public class ControllerRestauranteImpl implements ControllerRestaurante {
         Funcionario novoFuncionario = new Funcionario(nome, cargo, telefone, email, salario, superior);
 
         // Adicionar o funcionario ao repositório
-        repositorioRestaurante.cadastrar(novoFuncionario);
+        funcionarioRepository.cadastrar(novoFuncionario);
 
     }
 
     @Override
     public void listar() {
         //Chama o método "listarLivrosNaoEmprestados" e obtém seu retorno
-        List<Funcionario> funcionariosCadastrados = repositorioRestaurante.listar();
+        List<Funcionario> funcionariosCadastrados = funcionarioRepository.listar();
         if (funcionariosCadastrados.isEmpty()) {
             System.out.println("Não há funcionários cadastrados no momento.");
         } else {
@@ -45,12 +46,12 @@ public class ControllerRestauranteImpl implements ControllerRestaurante {
     @Override
     public void atualizar(String funcionarioAtualizar, String nome, String cargo, String telefone, String email, double salario, String superior) {
         Funcionario novoDadoFuncionario = new Funcionario(nome, cargo, telefone, email, salario, superior);
-        repositorioRestaurante.atualizar(novoDadoFuncionario, funcionarioAtualizar);
+        funcionarioRepository.atualizar(novoDadoFuncionario, funcionarioAtualizar);
     }
 
     @Override
     public void deletar(String funcionarioExcluir) {
-        repositorioRestaurante.deletar(funcionarioExcluir);
+        funcionarioRepository.deletar(funcionarioExcluir);
     }
 
 

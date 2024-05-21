@@ -1,13 +1,14 @@
-package com.example.restaurante.model.repository;
+package com.example.restaurante.model.repository.ImplementsRepository;
 
 import com.example.restaurante.model.ConexaoBanco.DatabaseConnection;
 import com.example.restaurante.model.entity.Funcionario;
+import com.example.restaurante.model.repository.InterfacesRepository.FuncionarioRepository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RepositorioRestauranteImpl implements RepositorioRestaurante {
+public class FuncionarioRepositoryImpl implements FuncionarioRepository {
 
     @Override
     public void cadastrar(Funcionario funcionario) {

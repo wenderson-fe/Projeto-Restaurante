@@ -1,10 +1,19 @@
 package com.example.restaurante;
 
-import com.example.restaurante.controller.ControllerRestauranteImpl;
-import com.example.restaurante.model.repository.RepositorioRestaurante;
-import com.example.restaurante.model.repository.RepositorioRestauranteImpl;
-import com.example.restaurante.view.ViewRestaurante;
-import com.example.restaurante.view.ViewRestauranteImpl;
+import com.example.restaurante.controller.ImplementsController.ClienteControllerImpl;
+import com.example.restaurante.controller.InterfacesController.ClienteController;
+import com.example.restaurante.controller.InterfacesController.FuncionarioController;
+import com.example.restaurante.controller.ImplementsController.FuncionarioControllerImpl;
+import com.example.restaurante.model.repository.ImplementsRepository.ClienteRepositoryImpl;
+import com.example.restaurante.model.repository.InterfacesRepository.ClienteRepository;
+import com.example.restaurante.model.repository.InterfacesRepository.FuncionarioRepository;
+import com.example.restaurante.model.repository.ImplementsRepository.FuncionarioRepositoryImpl;
+import com.example.restaurante.view.ImplementsView.ClienteViewImpl;
+import com.example.restaurante.view.InterfacesView.ClienteView;
+import com.example.restaurante.view.InterfacesView.FuncionarioView;
+import com.example.restaurante.view.ImplementsView.FuncionarioViewImpl;
+import com.example.restaurante.view.InterfacesView.InterfaceView;
+import com.example.restaurante.view.ImplementsView.InterfaceViewImpl;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -20,12 +29,18 @@ public class RestauranteApplication {
 		boolean continuar = true;
 
 		// Configuração das dependências
-		RepositorioRestaurante repositorioRestaurante = new RepositorioRestauranteImpl();
-		ControllerRestauranteImpl controllerRestaurante = new ControllerRestauranteImpl(repositorioRestaurante);
-		ViewRestaurante view = new ViewRestauranteImpl(controllerRestaurante);
+		FuncionarioRepository funcionarioRepository = new FuncionarioRepositoryImpl();
+		ClienteRepository clienteRepository = new ClienteRepositoryImpl();
+
+		FuncionarioController funcionarioController = new FuncionarioControllerImpl(funcionarioRepository);
+		ClienteController clienteController = new ClienteControllerImpl(clienteRepository);
+
+		FuncionarioView funcionarioView = new FuncionarioViewImpl(funcionarioController);
+		ClienteView clienteView = new ClienteViewImpl(clienteController);
+		InterfaceView interfaceView = new InterfaceViewImpl(funcionarioView, clienteView);
 
 		do {
-			view.exibirMenu();
+			interfaceView.exibirMenu();
 			System.out.println("Escolha: ");
 
 			// Verifica se a entrada é um número
@@ -33,7 +48,7 @@ public class RestauranteApplication {
 				int escolha = sc.nextInt();
 				sc.nextLine(); // Limpa o buffer
 
-				view.executarOpcao(escolha);
+				interfaceView.executarOpcao(escolha);
 
 			} else {
 				System.out.println("Entrada inválida! Por favor, digite um número.");
