@@ -11,7 +11,7 @@ import java.util.List;
 public class FuncionarioRepositoryImpl implements FuncionarioRepository {
 
     @Override
-    public void cadastrar(Funcionario funcionario) {
+    public void cadastrarFuncionario(Funcionario funcionario) {
         try (Connection connection = DatabaseConnection.getConnection()) {
             // Buscar o ID do superior se não for "gerente"
             Integer idSuperior = null;
@@ -55,7 +55,7 @@ public class FuncionarioRepositoryImpl implements FuncionarioRepository {
     }
 
     @Override
-    public List<Funcionario> listar() {
+    public List<Funcionario> listarFuncionario() {
         //Listar Funcionários
         List<Funcionario> funcionariosCadastrados = new ArrayList<>();
 
@@ -89,7 +89,7 @@ public class FuncionarioRepositoryImpl implements FuncionarioRepository {
     }
 
     @Override
-    public void atualizar(Funcionario novoDadoFuncionario, String funcionario) {
+    public void atualizarFuncionario(Funcionario novoDadoFuncionario, String funcionario) {
         try (Connection connection = DatabaseConnection.getConnection()) {
             // Verificar se o funcionário existe
             String sql = "SELECT COUNT(*) AS count FROM funcionarios WHERE nome = ?";
@@ -149,7 +149,7 @@ public class FuncionarioRepositoryImpl implements FuncionarioRepository {
     }
 
     @Override
-    public void deletar(String funcionarioExcluir) {
+    public void deletarFuncionario(String funcionarioExcluir) {
         try (Connection connection = DatabaseConnection.getConnection()) {
             // Verificar se o funcionário existe
             String sqlVerificarExistencia = "SELECT id_funcionario FROM funcionarios WHERE nome = ?";

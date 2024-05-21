@@ -14,19 +14,19 @@ public class FuncionarioControllerImpl implements FuncionarioController {
     }
 
     @Override
-    public void cadastrar(String nome, String cargo, String telefone, String email, double salario, String superior) {
+    public void cadastrarFuncionario(String nome, String cargo, String telefone, String email, double salario, String superior) {
         // Criar objeto do funcionário com as informações recebidas
         Funcionario novoFuncionario = new Funcionario(nome, cargo, telefone, email, salario, superior);
 
         // Adicionar o funcionario ao repositório
-        funcionarioRepository.cadastrar(novoFuncionario);
+        funcionarioRepository.cadastrarFuncionario(novoFuncionario);
 
     }
 
     @Override
-    public void listar() {
+    public void listarFuncionario() {
         //Chama o método "listarLivrosNaoEmprestados" e obtém seu retorno
-        List<Funcionario> funcionariosCadastrados = funcionarioRepository.listar();
+        List<Funcionario> funcionariosCadastrados = funcionarioRepository.listarFuncionario();
         if (funcionariosCadastrados.isEmpty()) {
             System.out.println("Não há funcionários cadastrados no momento.");
         } else {
@@ -44,14 +44,14 @@ public class FuncionarioControllerImpl implements FuncionarioController {
     }
 
     @Override
-    public void atualizar(String funcionarioAtualizar, String nome, String cargo, String telefone, String email, double salario, String superior) {
+    public void atualizarFuncionario(String funcionarioAtualizar, String nome, String cargo, String telefone, String email, double salario, String superior) {
         Funcionario novoDadoFuncionario = new Funcionario(nome, cargo, telefone, email, salario, superior);
-        funcionarioRepository.atualizar(novoDadoFuncionario, funcionarioAtualizar);
+        funcionarioRepository.atualizarFuncionario(novoDadoFuncionario, funcionarioAtualizar);
     }
 
     @Override
-    public void deletar(String funcionarioExcluir) {
-        funcionarioRepository.deletar(funcionarioExcluir);
+    public void deletarFuncionario(String funcionarioExcluir) {
+        funcionarioRepository.deletarFuncionario(funcionarioExcluir);
     }
 
 

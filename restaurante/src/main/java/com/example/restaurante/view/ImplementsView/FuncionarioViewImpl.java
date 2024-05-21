@@ -34,19 +34,19 @@ public class FuncionarioViewImpl implements FuncionarioView {
 
         switch (escolha) {
             case 1:
-                cadastro();
+                cadastroFuncionario();
                 break;
 
             case 2:
-                atualizar();
+                atualizarFuncionario();
                 break;
 
             case 3:
-                deletar();
+                deletarFuncionario();
                 break;
 
             case 4:
-                listar();
+                listarFuncionario();
                 break;
 
             case 5:
@@ -62,7 +62,7 @@ public class FuncionarioViewImpl implements FuncionarioView {
     }
 
     // Método para cadastrar um funcionário
-    public void cadastro() {
+    public void cadastroFuncionario() {
         //Receber informações do funcionário
         System.out.println("Digite o nome: ");
         String nome = sc.nextLine();
@@ -78,18 +78,18 @@ public class FuncionarioViewImpl implements FuncionarioView {
         System.out.println("Digite o nome do superior (se não hover escreva gerente): ");
         String superior = sc.nextLine();
 
-        funcionarioController.cadastrar(nome, cargo, telefone, email, salario, superior);
+        funcionarioController.cadastrarFuncionario(nome, cargo, telefone, email, salario, superior);
 
     }
 
     @Override
-    public void listar() {
-        funcionarioController.listar();
+    public void listarFuncionario() {
+        funcionarioController.listarFuncionario();
     }
 
     @Override
-    public void atualizar() {
-        funcionarioController.listar();
+    public void atualizarFuncionario() {
+        funcionarioController.listarFuncionario();
         System.out.println("Digite o nome do funcionário para atualizar as informações: ");
         String funcionarioAtualizar = sc.nextLine();
 
@@ -107,16 +107,16 @@ public class FuncionarioViewImpl implements FuncionarioView {
         System.out.println("Digite o nome do superior (se não hover escreva gerente): ");
         String superior = sc.nextLine();
 
-        funcionarioController.atualizar(funcionarioAtualizar, nome, cargo, telefone, email, salario, superior);
+        funcionarioController.atualizarFuncionario(funcionarioAtualizar, nome, cargo, telefone, email, salario, superior);
     }
 
     @Override
-    public void deletar() {
-        funcionarioController.listar();
+    public void deletarFuncionario() {
+        funcionarioController.listarFuncionario();
         System.out.println("Digite o nome do funcionário que deseja excluir: ");
         String funcionarioExcluir = sc.nextLine();
 
-        funcionarioController.deletar(funcionarioExcluir);
+        funcionarioController.deletarFuncionario(funcionarioExcluir);
     }
 
     @Override
