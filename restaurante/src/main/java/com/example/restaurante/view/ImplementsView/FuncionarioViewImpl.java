@@ -110,6 +110,7 @@ public class FuncionarioViewImpl implements FuncionarioView {
         funcionarioController.atualizarFuncionario(funcionarioAtualizar, nome, cargo, telefone, email, salario, superior);
     }
 
+    //Método para excluir funcionário
     @Override
     public void deletarFuncionario() {
         funcionarioController.listarFuncionario();
@@ -121,8 +122,6 @@ public class FuncionarioViewImpl implements FuncionarioView {
 
     @Override
     public void menuPrincipal() {
-        //ViewInterface voltarMenu = new ViewInterface;
-        //voltarMenu.exibirMenu();
 
     }
 }

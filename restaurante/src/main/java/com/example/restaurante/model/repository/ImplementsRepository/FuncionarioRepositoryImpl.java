@@ -91,7 +91,7 @@ public class FuncionarioRepositoryImpl implements FuncionarioRepository {
     @Override
     public void atualizarFuncionario(Funcionario novoDadoFuncionario, String funcionario) {
         try (Connection connection = DatabaseConnection.getConnection()) {
-            // Verificar se o funcionário existe
+            // Verifica se o funcionário existe
             String sql = "SELECT COUNT(*) AS count FROM funcionarios WHERE nome = ?";
             try (PreparedStatement verificarExistencia = connection.prepareStatement(sql)) {
                 verificarExistencia.setString(1, funcionario);
@@ -151,7 +151,7 @@ public class FuncionarioRepositoryImpl implements FuncionarioRepository {
     @Override
     public void deletarFuncionario(String funcionarioExcluir) {
         try (Connection connection = DatabaseConnection.getConnection()) {
-            // Verificar se o funcionário existe
+            // Verifica se o funcionário existe
             String sqlVerificarExistencia = "SELECT id_funcionario FROM funcionarios WHERE nome = ?";
             Integer idFuncionario = null;
             try (PreparedStatement verificarExistencia = connection.prepareStatement(sqlVerificarExistencia)) {
@@ -173,7 +173,7 @@ public class FuncionarioRepositoryImpl implements FuncionarioRepository {
                 atualizarFuncionarios.executeUpdate();
             }
 
-            // Excluir o funcionário
+            // Exclui o funcionário
             String sqlDeletar = "DELETE FROM funcionarios WHERE id_funcionario = ?";
             try (PreparedStatement deletarFuncionario = connection.prepareStatement(sqlDeletar)) {
                 deletarFuncionario.setInt(1, idFuncionario);

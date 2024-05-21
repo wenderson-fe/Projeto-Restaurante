@@ -25,7 +25,7 @@ public class FuncionarioControllerImpl implements FuncionarioController {
 
     @Override
     public void listarFuncionario() {
-        //Chama o método "listarLivrosNaoEmprestados" e obtém seu retorno
+        //Chama o método "listarFuncionario" e obtém seu retorno
         List<Funcionario> funcionariosCadastrados = funcionarioRepository.listarFuncionario();
         if (funcionariosCadastrados.isEmpty()) {
             System.out.println("Não há funcionários cadastrados no momento.");

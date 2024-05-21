@@ -41,6 +41,7 @@ public class InterfaceViewImpl implements InterfaceView {
         switch (n) {
             case 1:
                 viewCliente.gerenciaCliente();
+                break;
             case 2:
                 viewFuncionario.gerenciaFuncionario();
                 break;
@@ -70,11 +71,6 @@ public class InterfaceViewImpl implements InterfaceView {
 
     }
 
-    //Método para voltar ao menu principal
-    @Override
-    public void menuPrincipal() {
-        exibirMenu();
-    }
 }
 
 

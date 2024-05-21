@@ -4,6 +4,4 @@ public interface InterfaceView {
     void exibirMenu();
     void executarOpcao(int n);
     void saindoDoSistema();
-    void menuPrincipal();
-
 }
