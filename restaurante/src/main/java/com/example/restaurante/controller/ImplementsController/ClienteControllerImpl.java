@@ -15,11 +15,6 @@ public class ClienteControllerImpl implements ClienteController {
     }
 
     @Override
-    public void gerenciaCliente() {
-
-    }
-
-    @Override
     public void cadastrarCliente(String nome, String endereco, String telefone) {
         //Criar objeto do cliente com as informações recebidas
         Cliente novoCliente = new Cliente(nome, endereco, telefone);

@@ -3,16 +3,19 @@ package com.example.restaurante.view.ImplementsView;
 import com.example.restaurante.view.InterfacesView.ClienteView;
 import com.example.restaurante.view.InterfacesView.FuncionarioView;
 import com.example.restaurante.view.InterfacesView.InterfaceView;
+import com.example.restaurante.view.InterfacesView.PratoView;
 
 import java.util.Scanner;
 
 public class InterfaceViewImpl implements InterfaceView {
-    private FuncionarioView viewFuncionario;
-    private ClienteView viewCliente;
+    private FuncionarioView funcionarioView;
+    private ClienteView clienteView;
+    private PratoView pratoView;
 
-    public InterfaceViewImpl(FuncionarioView viewFuncionario, ClienteView viewCliente) {
-        this.viewFuncionario = viewFuncionario;
-        this.viewCliente = viewCliente;
+    public InterfaceViewImpl(FuncionarioView funcionarioView, ClienteView clienteView, PratoView pratoView) {
+        this.funcionarioView = funcionarioView;
+        this.clienteView = clienteView;
+        this.pratoView = pratoView;
     }
 
     Scanner sc = new Scanner(System.in);
@@ -40,10 +43,13 @@ public class InterfaceViewImpl implements InterfaceView {
         //Captura a opção escolhida pelo usuário.
         switch (n) {
             case 1:
-                viewCliente.gerenciaCliente();
+                clienteView.gerenciaCliente();
                 break;
             case 2:
-                viewFuncionario.gerenciaFuncionario();
+                funcionarioView.gerenciaFuncionario();
+                break;
+            case 5:
+                pratoView.gerenciaPrato();
                 break;
             case 6:
                 saindoDoSistema();

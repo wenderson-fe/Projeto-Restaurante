@@ -1,19 +1,25 @@
 package com.example.restaurante;
 
 import com.example.restaurante.controller.ImplementsController.ClienteControllerImpl;
+import com.example.restaurante.controller.ImplementsController.PratoControllerImpl;
 import com.example.restaurante.controller.InterfacesController.ClienteController;
 import com.example.restaurante.controller.InterfacesController.FuncionarioController;
 import com.example.restaurante.controller.ImplementsController.FuncionarioControllerImpl;
+import com.example.restaurante.controller.InterfacesController.PratoController;
 import com.example.restaurante.model.repository.ImplementsRepository.ClienteRepositoryImpl;
+import com.example.restaurante.model.repository.ImplementsRepository.PratoRepositoryImpl;
 import com.example.restaurante.model.repository.InterfacesRepository.ClienteRepository;
 import com.example.restaurante.model.repository.InterfacesRepository.FuncionarioRepository;
 import com.example.restaurante.model.repository.ImplementsRepository.FuncionarioRepositoryImpl;
+import com.example.restaurante.model.repository.InterfacesRepository.PratoRepository;
 import com.example.restaurante.view.ImplementsView.ClienteViewImpl;
+import com.example.restaurante.view.ImplementsView.PratoViewImpl;
 import com.example.restaurante.view.InterfacesView.ClienteView;
 import com.example.restaurante.view.InterfacesView.FuncionarioView;
 import com.example.restaurante.view.ImplementsView.FuncionarioViewImpl;
 import com.example.restaurante.view.InterfacesView.InterfaceView;
 import com.example.restaurante.view.ImplementsView.InterfaceViewImpl;
+import com.example.restaurante.view.InterfacesView.PratoView;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -31,13 +37,17 @@ public class RestauranteApplication {
 		// Configuração das dependências
 		FuncionarioRepository funcionarioRepository = new FuncionarioRepositoryImpl();
 		ClienteRepository clienteRepository = new ClienteRepositoryImpl();
+		PratoRepository pratoRepository = new PratoRepositoryImpl();
 
 		FuncionarioController funcionarioController = new FuncionarioControllerImpl(funcionarioRepository);
 		ClienteController clienteController = new ClienteControllerImpl(clienteRepository);
+		PratoController pratoController = new PratoControllerImpl(pratoRepository);
 
 		FuncionarioView funcionarioView = new FuncionarioViewImpl(funcionarioController);
 		ClienteView clienteView = new ClienteViewImpl(clienteController);
-		InterfaceView interfaceView = new InterfaceViewImpl(funcionarioView, clienteView);
+		PratoView pratoView = new PratoViewImpl(pratoController);
+
+		InterfaceView interfaceView = new InterfaceViewImpl(funcionarioView, clienteView, pratoView);
 
 		do {
 			interfaceView.exibirMenu();
