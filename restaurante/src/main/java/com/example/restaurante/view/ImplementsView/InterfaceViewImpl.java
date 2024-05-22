@@ -1,9 +1,6 @@
 package com.example.restaurante.view.ImplementsView;
 
-import com.example.restaurante.view.InterfacesView.ClienteView;
-import com.example.restaurante.view.InterfacesView.FuncionarioView;
-import com.example.restaurante.view.InterfacesView.InterfaceView;
-import com.example.restaurante.view.InterfacesView.PratoView;
+import com.example.restaurante.view.InterfacesView.*;
 
 import java.util.Scanner;
 
@@ -11,11 +8,14 @@ public class InterfaceViewImpl implements InterfaceView {
     private FuncionarioView funcionarioView;
     private ClienteView clienteView;
     private PratoView pratoView;
+    private PagamentoView pagamentoView;
 
-    public InterfaceViewImpl(FuncionarioView funcionarioView, ClienteView clienteView, PratoView pratoView) {
+    public InterfaceViewImpl(FuncionarioView funcionarioView, ClienteView clienteView, PratoView pratoView,
+    PagamentoView pagamentoView) {
         this.funcionarioView = funcionarioView;
         this.clienteView = clienteView;
         this.pratoView = pratoView;
+        this.pagamentoView = pagamentoView;
     }
 
     Scanner sc = new Scanner(System.in);
@@ -23,19 +23,21 @@ public class InterfaceViewImpl implements InterfaceView {
     @Override
     public void exibirMenu() {
         //Exibe as opções do sistema
-        System.out.println("--------------- Menu ----------------");
+        System.out.println("----------------- Menu ------------------");
         System.out.println("1. Gerenciamento de Clientes");
-        System.out.println("-------------------------------------");
+        System.out.println("-----------------------------------------");
         System.out.println("2. Gerenciamento de Funcionários");
-        System.out.println("-------------------------------------");
+        System.out.println("-----------------------------------------");
         System.out.println("3. Gerenciamento de Pedidos");
-        System.out.println("-------------------------------------");
+        System.out.println("-----------------------------------------");
         System.out.println("4. Gerenciamento de Itens do Pedido");
-        System.out.println("-------------------------------------");
+        System.out.println("-----------------------------------------");
         System.out.println("5. Gerenciamento de Pratos");
-        System.out.println("-------------------------------------");
-        System.out.println("6. Sair do Sistema");
-        System.out.println("-------------------------------------");
+        System.out.println("-----------------------------------------");
+        System.out.println("6. Gerenciamento de Formas de Pagamento");
+        System.out.println("-----------------------------------------");
+        System.out.println("7. Sair do Sistema");
+        System.out.println("-----------------------------------------");
     }
 
     @Override
@@ -52,6 +54,10 @@ public class InterfaceViewImpl implements InterfaceView {
                 pratoView.gerenciaPrato();
                 break;
             case 6:
+                pagamentoView.gerenciaPagamento();
+                break;
+
+            case 7:
                 saindoDoSistema();
                 break;
             default:

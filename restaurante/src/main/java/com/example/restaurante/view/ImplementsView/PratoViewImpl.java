@@ -57,7 +57,6 @@ public class PratoViewImpl implements PratoView {
 
             default:
                 System.out.println("Opção inválida!");
-                //gerenciaFuncionario();
                 break;
         }
 
