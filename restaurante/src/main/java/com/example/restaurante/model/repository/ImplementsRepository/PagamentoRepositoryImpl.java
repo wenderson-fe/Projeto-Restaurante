@@ -2,7 +2,6 @@ package com.example.restaurante.model.repository.ImplementsRepository;
 
 import com.example.restaurante.model.ConexaoBanco.DatabaseConnection;
 import com.example.restaurante.model.entity.Pagamento;
-import com.example.restaurante.model.entity.Prato;
 import com.example.restaurante.model.repository.InterfacesRepository.PagamentoRepository;
 
 import java.sql.Connection;
@@ -62,11 +61,68 @@ public class PagamentoRepositoryImpl implements PagamentoRepository {
 
     @Override
     public void atualizarFormaPagamento(Pagamento novoDadoPagamento, String pagamento) {
+        try (Connection connection = DatabaseConnection.getConnection()) {
+            // Verifica se a forma de pagamento existe
+            String sql = "SELECT COUNT(*) AS count FROM formas_de_pagamento WHERE descricao = ?";
+            try (PreparedStatement verificarExistencia = connection.prepareStatement(sql)) {
+                verificarExistencia.setString(1, pagamento);
+                try (ResultSet rs = verificarExistencia.executeQuery()) {
+                    if (rs.next()) {
+                        int count = rs.getInt("count");
+                        if (count == 0) {
+                            System.out.println("Forma de pagamento não encontrada.");
+                            return;
+                        }
+                    }
+                }
+            }
 
+            // Atualiza os dados de forma de pagamento
+            String sqlAtualizar = "UPDATE formas_de_pagamento SET descricao = ?, taxa = ? WHERE descricao = ?";
+            try (PreparedStatement statement = connection.prepareStatement(sqlAtualizar)) {
+                statement.setString(1, novoDadoPagamento.getDescricao());
+                statement.setString(2, novoDadoPagamento.getTaxa());
+                statement.setString(3, pagamento);
+
+                statement.executeUpdate();
+                System.out.println("Dados de forma de pagamento atualizados com sucesso!");
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao atualizar dados de forma de pagamento!");
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void deletarFormaPagamento(String pagamentoExcluir) {
+        try (Connection connection = DatabaseConnection.getConnection()) {
+            // Verifica se a forma de pagamento existe
+            String sqlVerificarExistencia = "SELECT id_pagamento FROM formas_de_pagamento WHERE descricao = ?";
+            Integer idPagamento = null;
+            try (PreparedStatement verificarExistencia = connection.prepareStatement(sqlVerificarExistencia)) {
+                verificarExistencia.setString(1, pagamentoExcluir);
+                try (ResultSet rs = verificarExistencia.executeQuery()) {
+                    if (rs.next()) {
+                        idPagamento = rs.getInt("id_pagamento");
+                    } else {
+                        System.out.println("Forma de pagamento não encontrado.");
+                        return;
+                    }
+                }
+            }
 
+            // Exclui o pagamento
+            String sqlDeletar = "DELETE FROM formas_de_pagamento WHERE id_pagamento = ?";
+            try (PreparedStatement deletarPrato = connection.prepareStatement(sqlDeletar)) {
+                deletarPrato.setInt(1, idPagamento);
+                deletarPrato.executeUpdate();
+                System.out.println("Forma de pagamento excluída com sucesso!");
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao excluir forma de pagamento!");
+            e.printStackTrace();
+        }
     }
 }

@@ -72,16 +72,33 @@ public class PagamentoViewImpl implements PagamentoView {
         pagamentoController.cadastrarFormaPagamento(descricao, taxa);
     }
 
+    //Método para atualizar informações de forma de pagamento
     @Override
     public void atualizarPagamento() {
+        pagamentoController.listarFormaPagamento();
 
+        System.out.println("Digite o nome da forma de pagamento para atualizar as informações: ");
+        String pagamentoAtualizar = sc.nextLine();
+
+        System.out.println("Digite o novo nome: ");
+        String descricao = sc.nextLine();
+        System.out.println("Digite a nova taxa: ");
+        String taxa = sc.nextLine();
+
+        pagamentoController.atualizarFormaPagamento(pagamentoAtualizar, descricao, taxa);
     }
 
     @Override
     public void deletarPagamento() {
+        pagamentoController.listarFormaPagamento();
 
+        System.out.println("Digite o nome da forma de pagamento de deseja excluir: ");
+        String pagamentoExcluir = sc.nextLine();
+
+        pagamentoController.deletarFormaPagamento(pagamentoExcluir);
     }
 
+    //Método para listar as formas de pagamento
     @Override
     public void listarPagamento() {
         pagamentoController.listarFormaPagamento();

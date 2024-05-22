@@ -41,11 +41,13 @@ public class PagamentoControllerImpl implements PagamentoController {
 
     @Override
     public void atualizarFormaPagamento(String pagamentoAtualizar, String descricao, String taxa) {
+        Pagamento novoDadoPagamento = new Pagamento(descricao, taxa);
 
+        pagamentoRepository.atualizarFormaPagamento(novoDadoPagamento, pagamentoAtualizar);
     }
 
     @Override
     public void deletarFormaPagamento(String pagamentoExcluir) {
-
+        pagamentoRepository.deletarFormaPagamento(pagamentoExcluir);
     }
 }
