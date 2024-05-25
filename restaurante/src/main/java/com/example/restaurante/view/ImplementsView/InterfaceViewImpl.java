@@ -9,13 +9,17 @@ public class InterfaceViewImpl implements InterfaceView {
     private ClienteView clienteView;
     private PratoView pratoView;
     private PagamentoView pagamentoView;
+    private PedidoView pedidoView;
+    private ItemPedidoView itemPedidoView;
 
     public InterfaceViewImpl(FuncionarioView funcionarioView, ClienteView clienteView, PratoView pratoView,
-    PagamentoView pagamentoView) {
+    PagamentoView pagamentoView, PedidoView pedidoView, ItemPedidoView itemPedidoView) {
         this.funcionarioView = funcionarioView;
         this.clienteView = clienteView;
         this.pratoView = pratoView;
         this.pagamentoView = pagamentoView;
+        this.pedidoView = pedidoView;
+        this.itemPedidoView = itemPedidoView;
     }
 
     Scanner sc = new Scanner(System.in);
@@ -47,6 +51,15 @@ public class InterfaceViewImpl implements InterfaceView {
             case 1:
                 clienteView.gerenciaCliente();
                 break;
+
+            case 3:
+                pedidoView.gerenciaPedido();
+                break;
+
+            case 4:
+                itemPedidoView.gerenciaItemPedido();
+                break;
+
             case 2:
                 funcionarioView.gerenciaFuncionario();
                 break;

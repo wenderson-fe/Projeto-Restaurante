@@ -1,21 +1,9 @@
 package com.example.restaurante;
 
-import com.example.restaurante.controller.ImplementsController.ClienteControllerImpl;
-import com.example.restaurante.controller.ImplementsController.PagamentoControllerImpl;
-import com.example.restaurante.controller.ImplementsController.PratoControllerImpl;
-import com.example.restaurante.controller.InterfacesController.ClienteController;
-import com.example.restaurante.controller.InterfacesController.FuncionarioController;
-import com.example.restaurante.controller.ImplementsController.FuncionarioControllerImpl;
-import com.example.restaurante.controller.InterfacesController.PagamentoController;
-import com.example.restaurante.controller.InterfacesController.PratoController;
-import com.example.restaurante.model.repository.ImplementsRepository.ClienteRepositoryImpl;
-import com.example.restaurante.model.repository.ImplementsRepository.PagamentoRepositoryImpl;
-import com.example.restaurante.model.repository.ImplementsRepository.PratoRepositoryImpl;
-import com.example.restaurante.model.repository.InterfacesRepository.ClienteRepository;
-import com.example.restaurante.model.repository.InterfacesRepository.FuncionarioRepository;
-import com.example.restaurante.model.repository.ImplementsRepository.FuncionarioRepositoryImpl;
-import com.example.restaurante.model.repository.InterfacesRepository.PagamentoRepository;
-import com.example.restaurante.model.repository.InterfacesRepository.PratoRepository;
+import com.example.restaurante.controller.ImplementsController.*;
+import com.example.restaurante.controller.InterfacesController.*;
+import com.example.restaurante.model.repository.ImplementsRepository.*;
+import com.example.restaurante.model.repository.InterfacesRepository.*;
 import com.example.restaurante.view.ImplementsView.*;
 import com.example.restaurante.view.InterfacesView.*;
 import org.springframework.boot.SpringApplication;
@@ -37,18 +25,26 @@ public class RestauranteApplication {
 		ClienteRepository clienteRepository = new ClienteRepositoryImpl();
 		PratoRepository pratoRepository = new PratoRepositoryImpl();
 		PagamentoRepository pagamentoRepository = new PagamentoRepositoryImpl();
+		PedidoRepository pedidoRepository = new PedidoRepositoryImpl();
+		ItemPedidoRepository itemPedidoRepository = new ItemPedidoRepositoryImpl();
+
 
 		FuncionarioController funcionarioController = new FuncionarioControllerImpl(funcionarioRepository);
 		ClienteController clienteController = new ClienteControllerImpl(clienteRepository);
 		PratoController pratoController = new PratoControllerImpl(pratoRepository);
 		PagamentoController pagamentoController = new PagamentoControllerImpl(pagamentoRepository);
+		PedidoController pedidoController = new PedidoControllerImpl(pedidoRepository);
+		ItemPedidoController itemPedidoController = new ItemPedidoControllerImpl(itemPedidoRepository);
 
 		FuncionarioView funcionarioView = new FuncionarioViewImpl(funcionarioController);
 		ClienteView clienteView = new ClienteViewImpl(clienteController);
 		PratoView pratoView = new PratoViewImpl(pratoController);
 		PagamentoView pagamentoView = new PagamentoViewImpl(pagamentoController);
+		PedidoView pedidoView = new PedidoViewImpl(pedidoController);
+		ItemPedidoView itemPedidoView = new ItemPedidoViewImpl(itemPedidoController);
 
-		InterfaceView interfaceView = new InterfaceViewImpl(funcionarioView, clienteView, pratoView, pagamentoView);
+		InterfaceView interfaceView = new InterfaceViewImpl(funcionarioView, clienteView, pratoView, pagamentoView,
+		pedidoView, itemPedidoView);
 
 		do {
 			interfaceView.exibirMenu();
