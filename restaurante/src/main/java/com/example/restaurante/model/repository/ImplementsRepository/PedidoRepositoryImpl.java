@@ -2,15 +2,14 @@ package com.example.restaurante.model.repository.ImplementsRepository;
 
 import com.example.restaurante.model.ConexaoBanco.DatabaseConnection;
 import com.example.restaurante.model.entity.Pedido;
+import com.example.restaurante.model.repository.InterfacesRepository.ItemPedidoRepository;
 import com.example.restaurante.model.repository.InterfacesRepository.PedidoRepository;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
 
 public class PedidoRepositoryImpl implements PedidoRepository {
+
     @Override
     public void cadastrarPedido(Pedido pedido) {
         try (Connection connection = DatabaseConnection.getConnection()) {
@@ -35,23 +34,60 @@ public class PedidoRepositoryImpl implements PedidoRepository {
                 return;
             }
 
+            // Buscar o ID prato e o preço do prato
+            Integer idPrato = null;
+            Double precoPrato = null;
+            String sqlPrato = "SELECT id_prato, preco FROM pratos WHERE nome = ?";
+            try (PreparedStatement statement = connection.prepareStatement(sqlPrato)) {
+                statement.setString(1, pedido.getPrato());
+                try (ResultSet rs = statement.executeQuery()) {
+                    if (rs.next()) {
+                        idPrato = rs.getInt("id_prato");
+                        precoPrato = rs.getDouble("preco");
+                    }
+                }
+            }
+            if (idPrato == null) {
+                System.out.println("Prato não encontrado");
+                return;
+            }
+
+            // Calcular o valor total
+            double valorTotal = pedido.getQuantidade() * precoPrato;
+
             // Inserir o pedido
-            String sql = "INSERT INTO pedidos (data, hora, status, id_funcionario, id_cliente, id_pagamento) VALUES (?, ?, ?, ?, ?, ?)";
-            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            String sql = "INSERT INTO pedidos (data, hora, status, valor_total, id_funcionario, id_cliente, id_pagamento, quantidade) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            try (PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
                 statement.setDate(1, pedido.getData());
                 statement.setTime(2, pedido.getHora());
+                statement.setDouble(4, valorTotal);
                 statement.setString(3, pedido.getStatus());
-                statement.setInt(4, idFuncionario);
-                statement.setInt(5, idCliente);
-                statement.setInt(6, idFormaDePagamento);
+                statement.setInt(5, idFuncionario);
+                statement.setInt(6, idCliente);
+                statement.setInt(7, idFormaDePagamento);
+                statement.setInt(8, pedido.getQuantidade());
 
                 statement.executeUpdate();
-                System.out.println("Pedido cadastrado com sucesso!");
+
+                try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        int idPedido = generatedKeys.getInt(1);
+
+                        ItemPedidoRepositoryImpl itemPedidoRepo = new ItemPedidoRepositoryImpl();
+                        itemPedidoRepo.cadastrarItemPedido(idPedido, idPrato);
+
+                        System.out.println("Pedido cadastrado com sucesso!");
+                    } else {
+                        System.out.println("Erro ao obter o ID do pedido inserido.");
+                    }
+                }
             }
         } catch (SQLException e) {
             System.out.println("Erro ao cadastrar pedido");
             e.printStackTrace();
         }
+
+
     }
 
     @Override

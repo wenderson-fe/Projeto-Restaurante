@@ -12,14 +12,18 @@ public class Pedido {
     private String funcionario;
     private String cliente;
     private String formaDePagamento;
+    private String prato;
+    private int quantidade;
 
-    public Pedido(String funcionario, String cliente, String formaDePagamento) {
+    public Pedido(String funcionario, String cliente, String formaDePagamento, String prato, int quantidade) {
         this.data = java.sql.Date.valueOf(LocalDate.now());
         this.hora = java.sql.Time.valueOf(LocalTime.now());
         this.status =  "Criado";
         this.funcionario = funcionario;
         this.cliente = cliente;
         this.formaDePagamento = formaDePagamento;
+        this.prato = prato;
+        this.quantidade = quantidade;
     }
 
     public Date getData() {
@@ -46,4 +50,11 @@ public class Pedido {
         return formaDePagamento;
     }
 
+    public String getPrato() {
+        return prato;
+    }
+
+    public int getQuantidade() {
+        return quantidade;
+    }
 }

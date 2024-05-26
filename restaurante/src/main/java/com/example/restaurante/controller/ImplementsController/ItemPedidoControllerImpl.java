@@ -13,14 +13,6 @@ public class ItemPedidoControllerImpl implements ItemPedidoController {
     }
 
     @Override
-    public void cadastrarItemPedido(String nomeCliente, String prato, int quantidade) {
-        // Criar objeto de ItemPedido com as informações recebidas
-        ItemPedido novoItemPedido = new ItemPedido(nomeCliente, prato, quantidade)
-        // Adicionar o pedido ao repositório
-        pedidoRepository.cadastrarPedido(novoPedido);
-    }
-
-    @Override
     public void atualizarItemPedido(String itemPedidoAtualizar, String nome, String prato, int quantidade) {
 
     }

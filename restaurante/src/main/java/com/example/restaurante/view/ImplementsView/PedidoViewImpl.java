@@ -71,8 +71,12 @@ public class PedidoViewImpl implements PedidoView {
         String cliente = sc.nextLine();
         System.out.println("Digite a forma de pagamento: ");
         String formaDePagamento = sc.nextLine();
+        System.out.println("Digite o prato: ");
+        String prato = sc.nextLine();
+        System.out.println("Digite a quantidade: ");
+        int quantidade = sc.nextInt();
 
-        pedidoController.cadastrarPedido(funcionario, cliente, formaDePagamento);
+        pedidoController.cadastrarPedido(funcionario, cliente, formaDePagamento, prato, quantidade);
     }
 
     @Override

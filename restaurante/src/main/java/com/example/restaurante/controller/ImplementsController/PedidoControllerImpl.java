@@ -13,9 +13,9 @@ public class PedidoControllerImpl implements PedidoController {
     }
 
     @Override
-    public void cadastrarPedido(String funcionario, String cliente, String formaDePagamento) {
+    public void cadastrarPedido(String funcionario, String cliente, String formaDePagamento, String prato, int quantidade) {
         // Criar objeto de pedido com as informações recebidas
-        Pedido novoPedido = new Pedido(funcionario, cliente, formaDePagamento);
+        Pedido novoPedido = new Pedido(funcionario, cliente, formaDePagamento, prato, quantidade);
 
         // Adicionar o pedido ao repositório
         pedidoRepository.cadastrarPedido(novoPedido);

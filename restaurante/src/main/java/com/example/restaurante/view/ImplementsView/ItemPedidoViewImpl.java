@@ -35,7 +35,7 @@ public class ItemPedidoViewImpl implements ItemPedidoView {
 
         switch (escolha) {
             case 1:
-                cadastroItemPedido();
+                //cadastroItemPedido();
                 break;
 
             case 2:
@@ -59,19 +59,6 @@ public class ItemPedidoViewImpl implements ItemPedidoView {
                 System.out.println("Opção inválida!");
                 break;
         }
-    }
-
-    @Override
-    public void cadastroItemPedido() {
-        //Receber informações de item pedido
-        System.out.println("Digite o nome do cliente: ");
-        String nomeCliente = sc.nextLine();
-        System.out.println("Digite o nome do crato: ");
-        String prato = sc.nextLine();
-        System.out.println("Digite a quantidade: ");
-        int quantidade = sc.nextInt();
-
-        itemPedidoController.cadastrarItemPedido(nomeCliente, prato, quantidade);
     }
 
     @Override
