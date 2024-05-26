@@ -3,7 +3,7 @@ package com.example.restaurante.model.entity;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
+import java.sql.Date;
 
 public class Pedido {
     private Date data;

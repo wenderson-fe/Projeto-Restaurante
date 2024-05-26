@@ -1,18 +1,18 @@
 package com.example.restaurante.model.entity;
 
 public class ItemPedido {
-    private String nome;
+    private String nomeCliente;
     private String prato;
     private int quantidade;
 
-    public ItemPedido(String nome, String prato, int quantidade) {
-        this.nome = nome;
+    public ItemPedido(String nomeCliente, String prato, int quantidade) {
+        this.nomeCliente = nomeCliente;
         this.prato = prato;
         this.quantidade = quantidade;
     }
 
-    public String getNome() {
-        return nome;
+    public String getNomeCliente() {
+        return nomeCliente;
     }
 
     public String getPrato() {

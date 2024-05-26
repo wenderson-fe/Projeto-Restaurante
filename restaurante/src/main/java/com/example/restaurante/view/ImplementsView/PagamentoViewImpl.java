@@ -65,11 +65,11 @@ public class PagamentoViewImpl implements PagamentoView {
     public void cadastroPagamento() {
         //Receber informações de forma de pagamento
         System.out.println("Digite o nome: ");
-        String descricao = sc.nextLine();
+        String nome = sc.nextLine();
         System.out.println("Digite a taxa: ");
         String taxa = sc.nextLine();
 
-        pagamentoController.cadastrarFormaPagamento(descricao, taxa);
+        pagamentoController.cadastrarFormaPagamento(nome, taxa);
     }
 
     //Método para atualizar informações de forma de pagamento
@@ -81,11 +81,11 @@ public class PagamentoViewImpl implements PagamentoView {
         String pagamentoAtualizar = sc.nextLine();
 
         System.out.println("Digite o novo nome: ");
-        String descricao = sc.nextLine();
+        String nome = sc.nextLine();
         System.out.println("Digite a nova taxa: ");
         String taxa = sc.nextLine();
 
-        pagamentoController.atualizarFormaPagamento(pagamentoAtualizar, descricao, taxa);
+        pagamentoController.atualizarFormaPagamento(pagamentoAtualizar, nome, taxa);
     }
 
     @Override

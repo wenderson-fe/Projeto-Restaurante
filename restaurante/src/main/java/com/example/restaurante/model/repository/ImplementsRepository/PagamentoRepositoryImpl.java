@@ -16,9 +16,9 @@ public class PagamentoRepositoryImpl implements PagamentoRepository {
     public void cadastrarFormaPagamento(Pagamento pagamento) {
         try (Connection connection = DatabaseConnection.getConnection()) {
             // Inserir o nova forma de pagamento
-            String sql = "INSERT INTO formas_de_pagamento (descricao, taxa) VALUES (?, ?)";
+            String sql = "INSERT INTO formas_de_pagamento (nome, taxa) VALUES (?, ?)";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                statement.setString(1, pagamento.getDescricao());
+                statement.setString(1, pagamento.getNome());
                 statement.setString(2, pagamento.getTaxa());
 
                 statement.executeUpdate();
@@ -38,13 +38,13 @@ public class PagamentoRepositoryImpl implements PagamentoRepository {
         List<Pagamento> formasDePagamento = new ArrayList<>();
 
         try (Connection connection = DatabaseConnection.getConnection()) {
-            String sql = "SELECT descricao, taxa FROM formas_de_pagamento";
+            String sql = "SELECT nome, taxa FROM formas_de_pagamento";
 
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
-                String descricao = resultSet.getString("descricao");
+                String descricao = resultSet.getString("nome");
                 String taxa = resultSet.getString("taxa");
 
                 Pagamento pagamento = new Pagamento(descricao, taxa);
@@ -63,7 +63,7 @@ public class PagamentoRepositoryImpl implements PagamentoRepository {
     public void atualizarFormaPagamento(Pagamento novoDadoPagamento, String pagamento) {
         try (Connection connection = DatabaseConnection.getConnection()) {
             // Verifica se a forma de pagamento existe
-            String sql = "SELECT COUNT(*) AS count FROM formas_de_pagamento WHERE descricao = ?";
+            String sql = "SELECT COUNT(*) AS count FROM formas_de_pagamento WHERE nome = ?";
             try (PreparedStatement verificarExistencia = connection.prepareStatement(sql)) {
                 verificarExistencia.setString(1, pagamento);
                 try (ResultSet rs = verificarExistencia.executeQuery()) {
@@ -78,9 +78,9 @@ public class PagamentoRepositoryImpl implements PagamentoRepository {
             }
 
             // Atualiza os dados de forma de pagamento
-            String sqlAtualizar = "UPDATE formas_de_pagamento SET descricao = ?, taxa = ? WHERE descricao = ?";
+            String sqlAtualizar = "UPDATE formas_de_pagamento SET nome = ?, taxa = ? WHERE nome = ?";
             try (PreparedStatement statement = connection.prepareStatement(sqlAtualizar)) {
-                statement.setString(1, novoDadoPagamento.getDescricao());
+                statement.setString(1, novoDadoPagamento.getNome());
                 statement.setString(2, novoDadoPagamento.getTaxa());
                 statement.setString(3, pagamento);
 
@@ -98,7 +98,7 @@ public class PagamentoRepositoryImpl implements PagamentoRepository {
     public void deletarFormaPagamento(String pagamentoExcluir) {
         try (Connection connection = DatabaseConnection.getConnection()) {
             // Verifica se a forma de pagamento existe
-            String sqlVerificarExistencia = "SELECT id_pagamento FROM formas_de_pagamento WHERE descricao = ?";
+            String sqlVerificarExistencia = "SELECT id_pagamento FROM formas_de_pagamento WHERE nome = ?";
             Integer idPagamento = null;
             try (PreparedStatement verificarExistencia = connection.prepareStatement(sqlVerificarExistencia)) {
                 verificarExistencia.setString(1, pagamentoExcluir);

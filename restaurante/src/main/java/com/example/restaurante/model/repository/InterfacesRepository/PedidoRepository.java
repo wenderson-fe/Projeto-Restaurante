@@ -3,6 +3,8 @@ package com.example.restaurante.model.repository.InterfacesRepository;
 import com.example.restaurante.model.entity.Pedido;
 import com.example.restaurante.model.entity.Prato;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
 public interface PedidoRepository {
@@ -10,4 +12,5 @@ public interface PedidoRepository {
     List<Pedido> listarPedido();
     void atualizarPedido(Pedido novoDadoPedido, String pedido);
     void deletarPedido(String pedidoExcluir);
+    Integer buscarId(Connection connection, String nomeTabela, String nomeCampoId, String nome);
 }

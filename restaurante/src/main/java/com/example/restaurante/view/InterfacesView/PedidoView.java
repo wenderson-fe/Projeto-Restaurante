@@ -5,6 +5,6 @@ public interface PedidoView {
     void cadastroPedido();
     void atualizarPedido();
     void deletarPedido();
-    void listarPedido();
+    void listarPedidos();
     void menuPrincipal();
 }

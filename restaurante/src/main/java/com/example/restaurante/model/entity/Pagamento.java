@@ -1,16 +1,16 @@
 package com.example.restaurante.model.entity;
 
 public class Pagamento {
-    private String descricao;
+    private String nome;
     private String taxa;
 
-    public Pagamento(String descricao, String taxa) {
-        this.descricao = descricao;
+    public Pagamento(String nome, String taxa) {
+        this.nome = nome;
         this.taxa = taxa;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getNome() {
+        return nome;
     }
 
     public String getTaxa() {

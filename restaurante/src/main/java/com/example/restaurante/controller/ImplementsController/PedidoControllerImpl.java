@@ -1,6 +1,8 @@
 package com.example.restaurante.controller.ImplementsController;
 
 import com.example.restaurante.controller.InterfacesController.PedidoController;
+import com.example.restaurante.model.entity.Pedido;
+import com.example.restaurante.model.entity.Prato;
 import com.example.restaurante.model.repository.InterfacesRepository.PedidoRepository;
 
 public class PedidoControllerImpl implements PedidoController {
@@ -12,7 +14,11 @@ public class PedidoControllerImpl implements PedidoController {
 
     @Override
     public void cadastrarPedido(String funcionario, String cliente, String formaDePagamento) {
+        // Criar objeto de pedido com as informações recebidas
+        Pedido novoPedido = new Pedido(funcionario, cliente, formaDePagamento);
 
+        // Adicionar o pedido ao repositório
+        pedidoRepository.cadastrarPedido(novoPedido);
     }
 
     @Override

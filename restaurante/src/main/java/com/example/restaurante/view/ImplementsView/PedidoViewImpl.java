@@ -36,19 +36,19 @@ public class PedidoViewImpl implements PedidoView {
 
         switch (escolha) {
             case 1:
-                //cadastroPrato();
+                cadastroPedido();
                 break;
 
             case 2:
-                //atualizarPrato();
+                atualizarPedido();
                 break;
 
             case 3:
-                //deletarPrato();
+                deletarPedido();
                 break;
 
             case 4:
-                //listarPrato();
+                listarPedidos();
                 break;
 
             case 5:
@@ -64,7 +64,15 @@ public class PedidoViewImpl implements PedidoView {
 
     @Override
     public void cadastroPedido() {
+        //Receber informações de pedido
+        System.out.println("Digite o nome do funcionário: ");
+        String funcionario = sc.nextLine();
+        System.out.println("Digite o nome do cliente: ");
+        String cliente = sc.nextLine();
+        System.out.println("Digite a forma de pagamento: ");
+        String formaDePagamento = sc.nextLine();
 
+        pedidoController.cadastrarPedido(funcionario, cliente, formaDePagamento);
     }
 
     @Override
@@ -78,7 +86,7 @@ public class PedidoViewImpl implements PedidoView {
     }
 
     @Override
-    public void listarPedido() {
+    public void listarPedidos() {
 
     }
 

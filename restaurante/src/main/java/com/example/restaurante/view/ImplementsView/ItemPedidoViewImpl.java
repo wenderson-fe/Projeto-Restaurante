@@ -35,19 +35,19 @@ public class ItemPedidoViewImpl implements ItemPedidoView {
 
         switch (escolha) {
             case 1:
-                //cadastroPrato();
+                cadastroItemPedido();
                 break;
 
             case 2:
-               // atualizarPrato();
+                atualizarItemPedido();
                 break;
 
             case 3:
-                //deletarPrato();
+                deletarItemPedido();
                 break;
 
             case 4:
-                //listarPrato();
+                listarItemPedido();
                 break;
 
             case 5:
@@ -63,7 +63,15 @@ public class ItemPedidoViewImpl implements ItemPedidoView {
 
     @Override
     public void cadastroItemPedido() {
+        //Receber informações de item pedido
+        System.out.println("Digite o nome do cliente: ");
+        String nomeCliente = sc.nextLine();
+        System.out.println("Digite o nome do crato: ");
+        String prato = sc.nextLine();
+        System.out.println("Digite a quantidade: ");
+        int quantidade = sc.nextInt();
 
+        itemPedidoController.cadastrarItemPedido(nomeCliente, prato, quantidade);
     }
 
     @Override
