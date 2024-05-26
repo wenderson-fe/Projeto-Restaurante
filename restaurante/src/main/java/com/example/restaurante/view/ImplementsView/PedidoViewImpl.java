@@ -91,7 +91,7 @@ public class PedidoViewImpl implements PedidoView {
 
     @Override
     public void listarPedidos() {
-
+        pedidoController.listarPedidos();
     }
 
     @Override

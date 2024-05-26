@@ -25,9 +25,9 @@ public class RestauranteApplication {
 		ClienteRepository clienteRepository = new ClienteRepositoryImpl();
 		PratoRepository pratoRepository = new PratoRepositoryImpl();
 		PagamentoRepository pagamentoRepository = new PagamentoRepositoryImpl();
-		PedidoRepository pedidoRepository = new PedidoRepositoryImpl();
-		ItemPedidoRepository itemPedidoRepository = new ItemPedidoRepositoryImpl();
 
+		ItemPedidoRepository itemPedidoRepository = new ItemPedidoRepositoryImpl();
+		PedidoRepository pedidoRepository = new PedidoRepositoryImpl(itemPedidoRepository);
 
 		FuncionarioController funcionarioController = new FuncionarioControllerImpl(funcionarioRepository);
 		ClienteController clienteController = new ClienteControllerImpl(clienteRepository);

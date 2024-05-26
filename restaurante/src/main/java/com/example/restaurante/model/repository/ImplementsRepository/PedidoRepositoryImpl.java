@@ -1,14 +1,22 @@
 package com.example.restaurante.model.repository.ImplementsRepository;
 
 import com.example.restaurante.model.ConexaoBanco.DatabaseConnection;
+import com.example.restaurante.model.entity.ItemPedido;
 import com.example.restaurante.model.entity.Pedido;
+import com.example.restaurante.model.entity.PedidoCadastrado;
 import com.example.restaurante.model.repository.InterfacesRepository.ItemPedidoRepository;
 import com.example.restaurante.model.repository.InterfacesRepository.PedidoRepository;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PedidoRepositoryImpl implements PedidoRepository {
+    private ItemPedidoRepository itemPedidoRepository;
+
+    public PedidoRepositoryImpl (ItemPedidoRepository itemPedidoRepository) {
+        this.itemPedidoRepository = itemPedidoRepository;
+    }
 
     @Override
     public void cadastrarPedido(Pedido pedido) {
@@ -73,8 +81,7 @@ public class PedidoRepositoryImpl implements PedidoRepository {
                     if (generatedKeys.next()) {
                         int idPedido = generatedKeys.getInt(1);
 
-                        ItemPedidoRepositoryImpl itemPedidoRepo = new ItemPedidoRepositoryImpl();
-                        itemPedidoRepo.cadastrarItemPedido(idPedido, idPrato);
+                        itemPedidoRepository.cadastrarItemPedido(idPedido, idPrato);
 
                         System.out.println("Pedido cadastrado com sucesso!");
                     } else {
@@ -91,8 +98,44 @@ public class PedidoRepositoryImpl implements PedidoRepository {
     }
 
     @Override
-    public List<Pedido> listarPedido() {
-        return List.of();
+    public List<PedidoCadastrado> listarPedido() {
+        List<PedidoCadastrado> pedidos = new ArrayList<>();
+
+        try (Connection connection = DatabaseConnection.getConnection()) {
+            String sql = "SELECT id_pedido, data, hora, status, valor_total, id_funcionario, id_cliente, id_pagamento, quantidade FROM pedidos";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                int idPedido = resultSet.getInt("id_pedido");
+                Date data = resultSet.getDate("data");
+                Time hora = resultSet.getTime("hora");
+                String status = resultSet.getString("status");
+                double valorTotal = resultSet.getDouble("valor_total");
+                int idFuncionario = resultSet.getInt("id_funcionario");
+                int idCliente = resultSet.getInt("id_cliente");
+                int idPagamento = resultSet.getInt("id_pagamento");
+                int quantidade = resultSet.getInt("quantidade");
+
+                // Recuperar nomes associados aos IDs
+                String nomeFuncionario = buscarNome(connection, "funcionarios", "nome", "id_funcionario", idFuncionario);
+                String nomeCliente = buscarNome(connection, "clientes", "nome", "id_cliente", idCliente);
+                String nomeFormaDePagamento = buscarNome(connection, "formas_de_pagamento", "nome", "id_pagamento", idPagamento);
+
+                PedidoCadastrado pedidoCadastrado = new PedidoCadastrado(idPedido, data, hora, status, valorTotal, nomeFuncionario, nomeCliente, nomeFormaDePagamento, quantidade);
+
+                // Recuperar itens para este pedido
+                List<ItemPedido> itensPedido = itemPedidoRepository.listarItensPedido(idPedido, connection);
+                pedidoCadastrado.setItensPedido(itensPedido);
+
+                pedidos.add(pedidoCadastrado);
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro ao listar pedidos");
+            e.printStackTrace();
+        }
+
+        return pedidos;
     }
 
     @Override
@@ -117,6 +160,23 @@ public class PedidoRepositoryImpl implements PedidoRepository {
             }
         } catch (SQLException e) {
             System.out.println("Erro ao buscar ID na tabela " + nomeTabela + " para o nome " + nome);
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public String buscarNome(Connection connection, String tabela, String colunaNome, String colunaId, int id) {
+        String sql = "SELECT " + colunaNome + " FROM " + tabela + " WHERE " + colunaId + " = ?";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, id);
+            try (ResultSet rs = statement.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getString(colunaNome);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro ao buscar nome na tabela " + tabela);
             e.printStackTrace();
         }
         return null;
