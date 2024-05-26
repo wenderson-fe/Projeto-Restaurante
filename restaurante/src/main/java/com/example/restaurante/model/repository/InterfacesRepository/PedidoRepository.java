@@ -11,8 +11,8 @@ import java.util.List;
 public interface PedidoRepository {
     void cadastrarPedido(Pedido pedido);
     List<PedidoCadastrado> listarPedido();
-    void atualizarPedido(Pedido novoDadoPedido, String pedido);
-    void deletarPedido(String pedidoExcluir);
+    void atualizarPedido(Pedido novoDadoPedido, int pedido);
+    void deletarPedido(int pedidoExcluir);
     Integer buscarId(Connection connection, String nomeTabela, String nomeCampoId, String nome);
     String buscarNome(Connection connection, String tabela, String colunaNome, String colunaId, int id);
 }

@@ -60,13 +60,43 @@ public class ItemPedidoRepositoryImpl implements ItemPedidoRepository {
     }
 
     @Override
-    public void atualizarItemPedido(ItemPedido novoDadoItemPedido, String itemPedido) {
+    public void atualizarItemPedido(int idPrato, int idPedido) {
+        try (Connection connection = DatabaseConnection.getConnection()) {
+            // Atualizar o item do pedido
+            String sql = "UPDATE itens_pedido SET id_prato = ? WHERE id_pedido = ?";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setInt(1, idPrato);
+                statement.setInt(2, idPedido);
 
+                int rowsUpdated = statement.executeUpdate();
+
+                if (rowsUpdated > 0) {
+                    System.out.println("Item do pedido atualizado com sucesso!");
+                } else {
+                    System.out.println("Não foi possível atualizar o item do pedido.");
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro ao atualizar item do pedido");
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public void deletarItemPedido(String itemPedidoExcluir) {
+    public void deletarItemPedido(Connection connection, int itemPedidoExcluir) {
+        try {
+            String sql = "DELETE FROM itens_pedido WHERE id_pedido = ?";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setInt(1, itemPedidoExcluir);
 
+                int rowsDeleted = statement.executeUpdate();
+
+                System.out.println(rowsDeleted + " itens de pedido deletados");
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro ao deletar itens do pedido");
+            e.printStackTrace();
+        }
     }
 
     @Override

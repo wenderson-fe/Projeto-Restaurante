@@ -81,12 +81,36 @@ public class PedidoViewImpl implements PedidoView {
 
     @Override
     public void atualizarPedido() {
+        pedidoController.listarPedidos();
+
+        System.out.println("Digite o id do pedido para atualizar as informações: ");
+        int pedidoAtualizar = sc.nextInt();
+        sc.nextLine();
+
+        System.out.println("Digite o novo nome do funcionário: ");
+        String funcionario = sc.nextLine();
+        System.out.println("Digite o novo nome do cliente: ");
+        String cliente = sc.nextLine();
+        System.out.println("Digite a nova forma de pagamento: ");
+        String formaDePagamento = sc.nextLine();
+        System.out.println("Digite o novo prato: ");
+        String prato = sc.nextLine();
+        System.out.println("Digite a nova quantidade: ");
+        int quantidade = sc.nextInt();
+
+        pedidoController.atualizarPedido(pedidoAtualizar, funcionario,cliente, formaDePagamento, prato, quantidade);
+
 
     }
 
     @Override
     public void deletarPedido() {
+        pedidoController.listarPedidos();
 
+        System.out.println("Digite o id do pedido que deseja excluir: ");
+        int idPedido = sc.nextInt();
+
+        pedidoController.deletarPedido(idPedido);
     }
 
     @Override

@@ -26,13 +26,15 @@ public class PedidoControllerImpl implements PedidoController {
     }
 
     @Override
-    public void atualizarPedido(String pedidoAtualizar, String funcionario, String cliente, String formaDePagamento) {
+    public void atualizarPedido(int pedidoAtualizar, String funcionario, String cliente, String formaDePagamento,  String prato, int quantidade) {
+        Pedido novoDadoPedido = new Pedido(funcionario, cliente, formaDePagamento, prato, quantidade);
 
+        pedidoRepository.atualizarPedido(novoDadoPedido, pedidoAtualizar);
     }
 
     @Override
-    public void deletarPedido(String pedidoExcluir) {
-
+    public void deletarPedido(int pedidoExcluir) {
+        pedidoRepository.deletarPedido(pedidoExcluir);
     }
 
     @Override
@@ -43,6 +45,7 @@ public class PedidoControllerImpl implements PedidoController {
         } else {
             System.out.println("Pedidos cadastrados: ");
             for (PedidoCadastrado pedido : pedidosCadastrados) {
+                System.out.println("ID: " + pedido.getId());
                 System.out.println("Data: " + pedido.getDataCadastrado());
                 System.out.println("Hora: " + pedido.getHoraCadastrado());
                 System.out.println("Status: " + pedido.getStatusCadastrado());

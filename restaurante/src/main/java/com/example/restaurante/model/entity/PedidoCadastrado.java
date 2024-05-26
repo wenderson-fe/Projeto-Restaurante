@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 public class PedidoCadastrado {
+    private int id;
     private Date data;
     private Time hora;
     private String status;
@@ -16,6 +17,7 @@ public class PedidoCadastrado {
     private List<ItemPedido> itensPedido;
 
     public PedidoCadastrado(int id, Date data, Time hora, String status, double valorTotal, String nomeFuncionario, String nomeCliente, String nomeFormaDePagamento, int quantidade) {
+        this.id = id;
         this.data = data;
         this.hora = hora;
         this.status = status;
@@ -24,6 +26,10 @@ public class PedidoCadastrado {
         this.nomeCliente = nomeCliente;
         this.nomeFormaDePagamento = nomeFormaDePagamento;
         this.quantidade = quantidade;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public Date getDataCadastrado() {

@@ -34,17 +34,15 @@ public class RestauranteApplication {
 		PratoController pratoController = new PratoControllerImpl(pratoRepository);
 		PagamentoController pagamentoController = new PagamentoControllerImpl(pagamentoRepository);
 		PedidoController pedidoController = new PedidoControllerImpl(pedidoRepository);
-		ItemPedidoController itemPedidoController = new ItemPedidoControllerImpl(itemPedidoRepository);
 
 		FuncionarioView funcionarioView = new FuncionarioViewImpl(funcionarioController);
 		ClienteView clienteView = new ClienteViewImpl(clienteController);
 		PratoView pratoView = new PratoViewImpl(pratoController);
 		PagamentoView pagamentoView = new PagamentoViewImpl(pagamentoController);
 		PedidoView pedidoView = new PedidoViewImpl(pedidoController);
-		ItemPedidoView itemPedidoView = new ItemPedidoViewImpl(itemPedidoController);
 
 		InterfaceView interfaceView = new InterfaceViewImpl(funcionarioView, clienteView, pratoView, pagamentoView,
-		pedidoView, itemPedidoView);
+		pedidoView);
 
 		do {
 			interfaceView.exibirMenu();

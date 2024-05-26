@@ -10,16 +10,14 @@ public class InterfaceViewImpl implements InterfaceView {
     private PratoView pratoView;
     private PagamentoView pagamentoView;
     private PedidoView pedidoView;
-    private ItemPedidoView itemPedidoView;
 
     public InterfaceViewImpl(FuncionarioView funcionarioView, ClienteView clienteView, PratoView pratoView,
-    PagamentoView pagamentoView, PedidoView pedidoView, ItemPedidoView itemPedidoView) {
+    PagamentoView pagamentoView, PedidoView pedidoView) {
         this.funcionarioView = funcionarioView;
         this.clienteView = clienteView;
         this.pratoView = pratoView;
         this.pagamentoView = pagamentoView;
         this.pedidoView = pedidoView;
-        this.itemPedidoView = itemPedidoView;
     }
 
     Scanner sc = new Scanner(System.in);
@@ -34,13 +32,11 @@ public class InterfaceViewImpl implements InterfaceView {
         System.out.println("-----------------------------------------");
         System.out.println("3. Gerenciamento de Pedidos");
         System.out.println("-----------------------------------------");
-        System.out.println("4. Gerenciamento de Itens do Pedido");
+        System.out.println("4. Gerenciamento de Pratos");
         System.out.println("-----------------------------------------");
-        System.out.println("5. Gerenciamento de Pratos");
+        System.out.println("5. Gerenciamento de Formas de Pagamento");
         System.out.println("-----------------------------------------");
-        System.out.println("6. Gerenciamento de Formas de Pagamento");
-        System.out.println("-----------------------------------------");
-        System.out.println("7. Sair do Sistema");
+        System.out.println("6. Sair do Sistema");
         System.out.println("-----------------------------------------");
     }
 
@@ -52,27 +48,26 @@ public class InterfaceViewImpl implements InterfaceView {
                 clienteView.gerenciaCliente();
                 break;
 
+            case 2:
+                funcionarioView.gerenciaFuncionario();
+                break;
+
             case 3:
                 pedidoView.gerenciaPedido();
                 break;
 
             case 4:
-                itemPedidoView.gerenciaItemPedido();
-                break;
-
-            case 2:
-                funcionarioView.gerenciaFuncionario();
-                break;
-            case 5:
                 pratoView.gerenciaPrato();
                 break;
-            case 6:
+
+            case 5:
                 pagamentoView.gerenciaPagamento();
                 break;
 
-            case 7:
+            case 6:
                 saindoDoSistema();
                 break;
+
             default:
                 System.out.println("Opção inválida!");
                 break;
